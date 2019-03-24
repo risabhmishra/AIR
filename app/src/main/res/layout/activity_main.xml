@@ -48,7 +48,6 @@
         android:id="@+id/second"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_alignParentEnd="true"
         android:layout_margin="5dp"
         android:layout_columnWeight="1"
         android:layout_rowWeight="1"
@@ -61,7 +60,7 @@
             android:background="@drawable/fr2">
 
             <TextView
-                android:id="@+id/tv_smoke"
+                android:id="@+id/tv_o3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -76,7 +75,6 @@
         android:id="@+id/third"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_below="@id/first"
         android:layout_margin="5dp"
         android:layout_columnWeight="1"
         android:layout_rowWeight="1"
@@ -104,8 +102,6 @@
         android:id="@+id/fourth"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_below="@id/second"
-        android:layout_alignParentEnd="true"
         android:layout_margin="5dp"
         android:layout_columnWeight="1"
         android:layout_rowWeight="1"
@@ -118,7 +114,7 @@
             android:background="@drawable/fr4">
 
             <TextView
-                android:id="@+id/tv_humidity"
+                android:id="@+id/tv_su"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"

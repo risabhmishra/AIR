@@ -13,7 +13,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -25,18 +28,30 @@ import com.squareup.picasso.Target;
 public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 1;
     Context context = this;
-    RelativeLayout rl_main,rl_co,rl_no,rl_su,rl_o3;
+    TextView rl_co,rl_no,rl_su,rl_o3;
 
     private FusedLocationProviderClient mFusedLocationClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+   requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        rl_co = findViewById(R.id.tv_co);
+        rl_no = findViewById(R.id.tv_nitrogen);
+        rl_su = findViewById(R.id.tv_su);
+        rl_o3 = findViewById(R.id.tv_o3);
+
         check_permission();
+        update_data();
 
+    }
 
+    private void update_data() {
+
+        
     }
 
     private void check_permission() {
