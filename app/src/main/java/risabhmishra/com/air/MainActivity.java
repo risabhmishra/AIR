@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 1;
     Context context = this;
     TextView rl_co,rl_no,rl_su,rl_o3;
+    SharedPreferences sharedpreference;
 
     private FusedLocationProviderClient mFusedLocationClient;
     @Override
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void update_data() {
 
-        
+
     }
 
     private void check_permission() {
@@ -109,6 +111,21 @@ public class MainActivity extends AppCompatActivity {
                                 // Logic to handle location object
                                 Double latittude = location.getLatitude();
                                 Double longitude = location.getLongitude();
+
+                                SharedPreferences.Editor editor = sharedpreference.edit();
+                                editor.putString("lat",latittude.toString());
+                                editor.putString("long",longitude.toString());
+                                editor.commit();
+
+
+                                /*
+                                * TO Fetch
+
+                                sharedpreference = getSharedPreferences("sf",Context.MODE_PRIVATE);
+                                sharedpreference.getString("lat","");
+                                sharedpreference.getString("long","");
+
+                                */
 
                                 Toast.makeText(MainActivity.this,"Latitude = " + latittude + "\nLongitude = " + longitude,Toast.LENGTH_LONG).show();
 
