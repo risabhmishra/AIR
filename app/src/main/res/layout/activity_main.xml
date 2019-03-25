@@ -28,19 +28,18 @@
         app:cardCornerRadius="5dp">
 
         <RelativeLayout
+            android:id="@+id/rl_1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/fr1">
 
-            <TextView
-                android:id="@+id/tv_co"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <com.github.anastr.speedviewlib.SpeedView
+                android:id="@+id/speedView1"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="230dp"
-                android:text="First"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:layout_alignParentBottom="true"
+                app:sv_unit="PPM"/>
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
@@ -59,15 +58,14 @@
             android:layout_height="match_parent"
             android:background="@drawable/fr2">
 
-            <TextView
-                android:id="@+id/tv_o3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <com.github.anastr.speedviewlib.SpeedView
+                android:id="@+id/speedView2"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="230dp"
-                android:text="Second"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:layout_alignParentBottom="true"
+                app:sv_unit="PPM"/>
+
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
@@ -86,15 +84,14 @@
             android:layout_height="match_parent"
             android:background="@drawable/fr3">
 
-            <TextView
-                android:id="@+id/tv_nitrogen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <com.github.anastr.speedviewlib.SpeedView
+                android:id="@+id/speedView3"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="230dp"
-                android:text="Third"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:layout_alignParentBottom="true"
+                app:sv_unit="PPM"/>
+
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
@@ -113,15 +110,15 @@
             android:layout_height="match_parent"
             android:background="@drawable/fr4">
 
-            <TextView
-                android:id="@+id/tv_su"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <com.github.anastr.speedviewlib.SpeedView
+                android:id="@+id/speedView4"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="230dp"
-                android:text="Fourth"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:layout_alignParentBottom="true"
+                app:sv_unit="PPM"/>
+
+
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 

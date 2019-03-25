@@ -1,6 +1,8 @@
 package risabhmishra.com.air;
 
 import android.Manifest;
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,6 +12,9 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
+import android.os.Build;
+import android.preference.PreferenceManager;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -20,11 +25,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.anastr.speedviewlib.SpeedView;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+
 
 public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 1;
@@ -33,23 +40,38 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedpreference;
 
     private FusedLocationProviderClient mFusedLocationClient;
+    private RelativeLayout mLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-   requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+
+        setContentView(R.layout.activity_main);
+
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        rl_co = findViewById(R.id.tv_co);
-        rl_no = findViewById(R.id.tv_nitrogen);
-        rl_su = findViewById(R.id.tv_su);
-        rl_o3 = findViewById(R.id.tv_o3);
 
         check_permission();
         update_data();
 
+        SpeedView speedometer1 = findViewById(R.id.speedView1);
+        speedometer1.speedTo(50);
+
+        SpeedView speedometer2 = findViewById(R.id.speedView2);
+        speedometer2.speedTo(60);
+
+        SpeedView speedometer3 = findViewById(R.id.speedView3);
+        speedometer3.speedTo(70);
+
+        SpeedView speedometer4 = findViewById(R.id.speedView4);
+        speedometer4.speedTo(80);
+        speedometer4.setWithTremble(false);
+
     }
+
 
     private void update_data() {
 
@@ -112,10 +134,14 @@ public class MainActivity extends AppCompatActivity {
                                 Double latittude = location.getLatitude();
                                 Double longitude = location.getLongitude();
 
+                                sharedpreference = PreferenceManager
+                                        .getDefaultSharedPreferences(MainActivity.this);
                                 SharedPreferences.Editor editor = sharedpreference.edit();
                                 editor.putString("lat",latittude.toString());
                                 editor.putString("long",longitude.toString());
-                                editor.commit();
+                                editor.apply();
+
+
 
 
                                 /*
