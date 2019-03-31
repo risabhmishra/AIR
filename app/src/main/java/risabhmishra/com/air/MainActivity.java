@@ -1,26 +1,21 @@
 package risabhmishra.com.air;
 
 import android.Manifest;
-import android.animation.ArgbEvaluator;
-import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
-import android.os.Build;
 import android.preference.PreferenceManager;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,8 +24,7 @@ import com.github.anastr.speedviewlib.SpeedView;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -41,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FusedLocationProviderClient mFusedLocationClient;
     private RelativeLayout mLayout;
+    private LinearLayout llayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +48,29 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        llayout = findViewById(R.id.llayout);
 
         check_permission();
         update_data();
+
+        llayout.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
+            public void onSwipeTop() {
+                startActivity(new Intent(MainActivity.this,WeatherForecast.class));
+            }
+            public void onSwipeRight() {
+                startActivity(new Intent(MainActivity.this,WeatherForecast.class));
+            }
+            public void onSwipeLeft() {
+                startActivity(new Intent(MainActivity.this,WeatherForecast.class));
+            }
+            public void onSwipeBottom() {
+                startActivity(new Intent(MainActivity.this,WeatherForecast.class));
+            }
+
+        });
+
+
+
 
         SpeedView speedometer1 = findViewById(R.id.speedView1);
         speedometer1.speedTo(50);
@@ -141,17 +156,6 @@ public class MainActivity extends AppCompatActivity {
                                 editor.putString("long",longitude.toString());
                                 editor.apply();
 
-
-
-
-                                /*
-                                * TO Fetch
-
-                                sharedpreference = getSharedPreferences("sf",Context.MODE_PRIVATE);
-                                sharedpreference.getString("lat","");
-                                sharedpreference.getString("long","");
-
-                                */
 
                                 Toast.makeText(MainActivity.this,"Latitude = " + latittude + "\nLongitude = " + longitude,Toast.LENGTH_LONG).show();
 
