@@ -51,7 +51,7 @@ public class WeatherForecast extends AppCompatActivity {
         weatherList = new ArrayList<>();
 
 
-        sharedpreference = getSharedPreferences("sf", Context.MODE_PRIVATE);
+        sharedpreference = getSharedPreferences("sf", 0);
         String lat = sharedpreference.getString("lat", "");
         String lon = sharedpreference.getString("long", "");
 

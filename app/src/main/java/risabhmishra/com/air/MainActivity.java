@@ -149,8 +149,8 @@ public class MainActivity extends AppCompatActivity {
                                 Double latittude = location.getLatitude();
                                 Double longitude = location.getLongitude();
 
-                                sharedpreference = PreferenceManager
-                                        .getDefaultSharedPreferences(MainActivity.this);
+                                sharedpreference = getApplicationContext().getSharedPreferences("sf",0);
+
                                 SharedPreferences.Editor editor = sharedpreference.edit();
                                 editor.putString("lat",latittude.toString());
                                 editor.putString("long",longitude.toString());
