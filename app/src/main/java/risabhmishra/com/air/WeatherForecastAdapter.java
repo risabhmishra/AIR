@@ -37,8 +37,8 @@ public class WeatherForecastAdapter extends RecyclerView.Adapter<WeatherForecast
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         holder.day.setText(weatherForecasts.get(position).getDay());
-        holder.min.setText(weatherForecasts.get(position).getMin_temp());
-        holder.max.setText(weatherForecasts.get(position).getMax_temp());
+        holder.min.setText(weatherForecasts.get(position).getMin_temp()+"°C");
+        holder.max.setText(weatherForecasts.get(position).getMax_temp()+"°C");
 
         Picasso.get().load(weatherForecasts.get(position).getImg_url()).into(holder.weather);
 

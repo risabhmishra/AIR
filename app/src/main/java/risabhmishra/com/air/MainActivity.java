@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                                 editor.apply();
 
 
-                                Toast.makeText(MainActivity.this,"Latitude = " + latittude + "\nLongitude = " + longitude,Toast.LENGTH_LONG).show();
+                                //Toast.makeText(MainActivity.this,"Latitude = " + latittude + "\nLongitude = " + longitude,Toast.LENGTH_LONG).show();
 
                             }
                         }

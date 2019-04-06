@@ -74,8 +74,7 @@ public class WeatherForecast extends AppCompatActivity {
 
             try {
                 addresses = geocoder.getFromLocation(Double.parseDouble(lat),Double.parseDouble(lon),1);
-                //addresses.get(0).getAddressLine(0);
-                area.setText(addresses.get(0).getLocality());
+                area.setText(addresses.get(0).getAddressLine(0));
             }
             catch (IOException e) {
                 e.printStackTrace();
@@ -104,7 +103,7 @@ public class WeatherForecast extends AppCompatActivity {
 
                         String min_now = String.valueOf(main_object.getJSONObject(0).getJSONObject("main").getDouble("temp_min"));
                         String max_now = String.valueOf(main_object.getJSONObject(0).getJSONObject("main").getDouble("temp_max"));
-                        degree.setText(max_now+" / "+min_now);
+                        degree.setText(max_now+"°C / "+min_now+"°C");
 
                         String iconcode_now = main_object.getJSONObject(0).getJSONArray("weather").getJSONObject(0).getString("icon");
 
