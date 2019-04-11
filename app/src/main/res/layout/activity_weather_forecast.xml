@@ -10,7 +10,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="210dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#D6EAF8">
 
         <ImageView
             android:id="@+id/iv_today"
@@ -50,6 +51,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"/>
 
 </LinearLayout>

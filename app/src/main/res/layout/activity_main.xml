@@ -40,7 +40,7 @@
                 android:layout_height="150dp"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
-                app:sv_unit="PPM"/>
+                app:sv_unit="PPM" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
