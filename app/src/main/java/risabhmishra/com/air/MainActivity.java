@@ -74,28 +74,24 @@ public class MainActivity extends AppCompatActivity {
 
         SpeedView speedometer1 = findViewById(R.id.speedView1);
         speedometer1.speedTo(19);
-        speedometer1.setMinMaxSpeed(0,40);
         speedometer1.setLowSpeedPercent(10);
         speedometer1.setMediumSpeedPercent(50);
         speedometer1.setUnitTextSize(7);
 
         SpeedView speedometer2 = findViewById(R.id.speedView2);
-        speedometer2.speedTo(192);
-        speedometer1.setMinMaxSpeed(0,500);
+        speedometer2.speedPercentTo(48);
         speedometer1.setLowSpeedPercent(20);
         speedometer1.setMediumSpeedPercent(50);
         speedometer1.setUnitTextSize(7);
 
         SpeedView speedometer3 = findViewById(R.id.speedView3);
         speedometer3.speedTo(250);
-        speedometer1.setMinMaxSpeed(0,500);
         speedometer1.setLowSpeedPercent(20);
         speedometer1.setMediumSpeedPercent(60);
         speedometer1.setUnitTextSize(7);
 
         SpeedView speedometer4 = findViewById(R.id.speedView4);
         speedometer4.speedTo(80);
-        speedometer1.setMinMaxSpeed(0,1000);
         speedometer1.setLowSpeedPercent(10);
         speedometer1.setMediumSpeedPercent(70);
         speedometer1.setUnitTextSize(7);
