@@ -8,11 +8,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -24,18 +25,23 @@ import com.github.anastr.speedviewlib.SpeedView;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
-
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 1;
     Context context = this;
-    TextView rl_co,rl_no,rl_su,rl_o3;
     SharedPreferences sharedpreference;
-
+long aqi_percent,co_percent;
     private FusedLocationProviderClient mFusedLocationClient;
     private RelativeLayout mLayout;
     private LinearLayout llayout;
+    private SpeedView speedometer1,speedometer2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        FirebaseApp.initializeApp(this);
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = db.getReference().child("Pollution");
+
 
         setContentView(R.layout.activity_main);
 
@@ -51,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         llayout = findViewById(R.id.llayout);
 
         check_permission();
-        update_data();
 
         llayout.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
             public void onSwipeTop() {
@@ -70,22 +79,45 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+myRef.addValueEventListener(new ValueEventListener() {
+    @Override
+    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        String values[] = dataSnapshot.getValue(String.class).split(",");
+        long aqi = (long)Float.parseFloat(values[0]);
+        long co  = (long)Float.parseFloat(values[3]);
+Log.d("aqi",Long.toString(aqi));
 
 
-        SpeedView speedometer1 = findViewById(R.id.speedView1);
-        speedometer1.speedTo(19);
-        speedometer1.setLowSpeedPercent(10);
-        speedometer1.setMediumSpeedPercent(50);
+
+     aqi_percent = map(aqi,0,600,0,100);
+     co_percent = map(co,0,80,0,100);
+
+     Log.d("a%",Long.toString(aqi_percent));
+
+     speedometer1.speedPercentTo((int)aqi_percent);
+     speedometer2.speedPercentTo((int)co_percent);
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+    }
+});
+
+        speedometer1 = findViewById(R.id.speedView1);
+        //speedometer1.speedTo(19);
+        speedometer1.setLowSpeedPercent(20);
+        speedometer1.setMediumSpeedPercent(60);
         speedometer1.setUnitTextSize(7);
 
-        SpeedView speedometer2 = findViewById(R.id.speedView2);
-        speedometer2.speedPercentTo(48);
-        speedometer1.setLowSpeedPercent(20);
-        speedometer1.setMediumSpeedPercent(50);
+        speedometer2 = findViewById(R.id.speedView2);
+        //speedometer2.speedPercentTo(48);
+        speedometer1.setLowSpeedPercent(10);
+        speedometer1.setMediumSpeedPercent(45);
         speedometer1.setUnitTextSize(7);
 
         SpeedView speedometer3 = findViewById(R.id.speedView3);
-        speedometer3.speedTo(250);
+        speedometer3.speedPercentTo(50);
         speedometer1.setLowSpeedPercent(20);
         speedometer1.setMediumSpeedPercent(60);
         speedometer1.setUnitTextSize(7);
@@ -98,9 +130,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void update_data() {
-
-
+    long map(long x, long in_min, long in_max, long out_min, long out_max)
+    {
+        return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
     }
 
     private void check_permission() {
